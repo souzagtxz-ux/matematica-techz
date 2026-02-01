@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# CSS CORRIGIDO (unsafe_allow_html=True)
+# CSS Estilo Hacker (Preto e Verde)
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
@@ -34,7 +34,6 @@ st.markdown("""
     .stButton>button:hover { 
         background-color: #00FF41 !important; 
         color: #000000 !important; 
-        box-shadow: 0 0 20px #00FF41;
     }
     
     .stTextInput>div>div>input { 
@@ -55,25 +54,21 @@ st.markdown("""
         font-family: 'Courier New', Courier, monospace;
         border-top: 1px solid #00FF41;
         font-size: 14px;
-        letter-spacing: 2px;
         z-index: 999;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# Cabeçalho
 st.markdown("<h1 style='text-align: center;'>⚡ MATEMATICA TECH ⚡</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>🧬 UNIVERSO DE CÁLCULOS INFINITOS</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>🧬 DATABASE GLOBAL ATIVA</p>", unsafe_allow_html=True)
 
-# Inicializar Groq
-client = Groq(api_key="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")
+# NOVA API KEY ATUALIZADA
+client = Groq(api_key="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")
 
-# Entrada
-pergunta = st.text_input("📝 INSIRA SUA PERGUNTA OU CONTA:", placeholder="Ex: Baskara, Derivada, 2+2...")
+pergunta = st.text_input("📝 INSIRA O CÁLCULO:", placeholder="Ex: Resolva 2x + 5 = 15")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Colunas para botões
 c1, c2 = st.columns(2)
 
 if pergunta:
@@ -81,21 +76,20 @@ if pergunta:
         if st.button("🎯 RESPOSTA DIRETA"):
             with st.spinner("🔢 CALCULANDO..."):
                 try:
-                    prompt = f"Resolva e dê apenas o resultado final: {pergunta}"
+                    prompt = f"Dê apenas o resultado direto de: {pergunta}"
                     resp = client.chat.completions.create(messages=[{"role":"user","content":prompt}], model="llama3-8b-8192")
                     st.success(f"✅ **RESULTADO:** {resp.choices[0].message.content}")
-                except:
-                    st.error("⚠️ ERRO NO SISTEMA")
+                except Exception as e:
+                    st.error(f"❌ ERRO: {str(e)}")
 
     with c2:
         if st.button("👨‍🏫 MODO PROFESSOR"):
             with st.spinner("📚 ANALISANDO..."):
                 try:
-                    prompt = f"Explique detalhadamente o passo a passo desta questão: {pergunta}"
+                    prompt = f"Explique o passo a passo de: {pergunta}"
                     resp = client.chat.completions.create(messages=[{"role":"user","content":prompt}], model="llama3-8b-8192")
                     st.info(f"📖 **PASSO A PASSO:**\n\n{resp.choices[0].message.content}")
-                except:
-                    st.error("⚠️ ERRO NA ANÁLISE")
+                except Exception as e:
+                    st.error(f"❌ ERRO: {str(e)}")
 
-# Rodapé Souza
 st.markdown('<div class="souza-footer">🛠️ CRIADO POR: SOUZA 🛠️</div>', unsafe_allow_html=True)
