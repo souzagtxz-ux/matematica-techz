@@ -60,9 +60,9 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center;'>⚡ MATEMATICA TECH ⚡</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>🧬 DATABASE GLOBAL ATIVA</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>🧬 DATABASE GLOBAL ATIVA (v3.3)</p>", unsafe_allow_html=True)
 
-# NOVA API KEY ATUALIZADA
+# API KEY DO SOUZA
 client = Groq(api_key="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")
 
 pergunta = st.text_input("📝 INSIRA O CÁLCULO:", placeholder="Ex: Resolva 2x + 5 = 15")
@@ -71,13 +71,16 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
 
+# Modelo Atualizado (Llama 3.3)
+MODELO = "llama-3.3-70b-versatile"
+
 if pergunta:
     with c1:
         if st.button("🎯 RESPOSTA DIRETA"):
             with st.spinner("🔢 CALCULANDO..."):
                 try:
-                    prompt = f"Dê apenas o resultado direto de: {pergunta}"
-                    resp = client.chat.completions.create(messages=[{"role":"user","content":prompt}], model="llama3-8b-8192")
+                    prompt = f"Você é uma calculadora. Dê apenas o resultado final: {pergunta}"
+                    resp = client.chat.completions.create(messages=[{"role":"user","content":prompt}], model=MODELO)
                     st.success(f"✅ **RESULTADO:** {resp.choices[0].message.content}")
                 except Exception as e:
                     st.error(f"❌ ERRO: {str(e)}")
@@ -86,8 +89,8 @@ if pergunta:
         if st.button("👨‍🏫 MODO PROFESSOR"):
             with st.spinner("📚 ANALISANDO..."):
                 try:
-                    prompt = f"Explique o passo a passo de: {pergunta}"
-                    resp = client.chat.completions.create(messages=[{"role":"user","content":prompt}], model="llama3-8b-8192")
+                    prompt = f"Explique detalhadamente o passo a passo de: {pergunta}"
+                    resp = client.chat.completions.create(messages=[{"role":"user","content":prompt}], model=MODELO)
                     st.info(f"📖 **PASSO A PASSO:**\n\n{resp.choices[0].message.content}")
                 except Exception as e:
                     st.error(f"❌ ERRO: {str(e)}")
