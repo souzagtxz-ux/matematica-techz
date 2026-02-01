@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# CSS Estilo Hacker + Emojis
+# CSS CORRIGIDO (unsafe_allow_html=True)
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}
@@ -32,8 +32,8 @@ st.markdown("""
         height: 3.5em;
     }
     .stButton>button:hover { 
-        background-color: #00FF41; 
-        color: #000000; 
+        background-color: #00FF41 !important; 
+        color: #000000 !important; 
         box-shadow: 0 0 20px #00FF41;
     }
     
@@ -56,13 +56,14 @@ st.markdown("""
         border-top: 1px solid #00FF41;
         font-size: 14px;
         letter-spacing: 2px;
+        z-index: 999;
     }
     </style>
-    """, unsafe_allow_stdio=True)
+    """, unsafe_allow_html=True)
 
-# Cabeçalho com Emojis
-st.markdown("<h1 style='text-align: center;'>⚡ MATEMATICA TECH ⚡</h1>", unsafe_allow_stdio=True)
-st.markdown("<p style='text-align: center;'>🧬 UNIVERSO DE CÁLCULOS INFINITOS</p>", unsafe_allow_stdio=True)
+# Cabeçalho
+st.markdown("<h1 style='text-align: center;'>⚡ MATEMATICA TECH ⚡</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>🧬 UNIVERSO DE CÁLCULOS INFINITOS</p>", unsafe_allow_html=True)
 
 # Inicializar Groq
 client = Groq(api_key="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")
@@ -70,9 +71,9 @@ client = Groq(api_key="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"
 # Entrada
 pergunta = st.text_input("📝 INSIRA SUA PERGUNTA OU CONTA:", placeholder="Ex: Baskara, Derivada, 2+2...")
 
-st.markdown("<br>", unsafe_allow_stdio=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-# Colunas para botões com Emojis
+# Colunas para botões
 c1, c2 = st.columns(2)
 
 if pergunta:
@@ -97,4 +98,4 @@ if pergunta:
                     st.error("⚠️ ERRO NA ANÁLISE")
 
 # Rodapé Souza
-st.markdown('<div class="souza-footer">🛠️ CRIADO POR: SOUZA 🛠️</div>', unsafe_allow_stdio=True)
+st.markdown('<div class="souza-footer">🛠️ CRIADO POR: SOUZA 🛠️</div>', unsafe_allow_html=True)
